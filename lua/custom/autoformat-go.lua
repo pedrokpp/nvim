@@ -1,20 +1,7 @@
-local lspconfig = require("lspconfig")
-lspconfig.gopls.setup({
-  settings = {
-    gopls = {
-      analyses = {
-        unusedparams = true,
-      },
-      staticcheck = true,
-      gofumpt = true,
-    },
-  },
-})
-
-local gopls_group = vim.api.nvim_create_augroup('ImportAndFormat', { clear = true })
+local goformat_augroup = vim.api.nvim_create_augroup('ImportAndFormat', { clear = true })
 vim.api.nvim_create_autocmd('BufWritePre', {
   pattern = "*.go",
-  group = gopls_group,
+  group = goformat_augroup,
   callback = function()
     local params = vim.lsp.util.make_range_params()
     params.context = {only = {"source.organizeImports"}}

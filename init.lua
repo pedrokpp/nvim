@@ -533,7 +533,13 @@ require('mason-lspconfig').setup()
 --  define the property 'filetypes' to the map in question.
 local servers = {
   -- clangd = {},
-  -- gopls = {},
+  gopls = {
+      analyses = {
+        unusedparams = true,
+      },
+      staticcheck = true,
+      gofumpt = true,
+  },
   -- pyright = {},
   -- rust_analyzer = {},
   -- tsserver = {},
@@ -626,8 +632,8 @@ cmp.setup {
   },
 }
 
-require("custom.gopls")
-require("options")
+require("custom.autoformat-go")
+require("custom.options")
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
